@@ -2,6 +2,7 @@ const Koa = require('koa');
 const bodyParser = require("koa-bodyparser");
 const staticServer = require('koa-static')
 const logger = require('koa-logger')
+const cors = require('@koa/cors');
 
 const errorHandler = require('./error')
 
@@ -17,8 +18,10 @@ const fileRouter = require('./router/file.router');
 const userRouter = require('./router/user.router')
 const { wrapperMiddleware } = require('./middleware/wrapper.middleware');
 
+
 const app = new Koa();
 
+app.use(cors());
 app.use(bodyParser())
 app.use(staticServer('static'));
 app.use(logger())
